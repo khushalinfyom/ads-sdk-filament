@@ -3,7 +3,10 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\CustomEditProfile;
+use App\Filament\Pages\Auth\CustomEmailVerificationPrompt;
 use App\Filament\Pages\Auth\CustomLogin;
+use App\Filament\Pages\Auth\CustomRegister;
+use App\Filament\Pages\Auth\CustomRequestPasswordReset;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -31,8 +34,10 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->login()
-            ->passwordReset()
+            ->login(CustomLogin::class)
+            ->registration(CustomRegister::class)
+            ->passwordReset(CustomRequestPasswordReset::class)
+            ->emailVerification(CustomEmailVerificationPrompt::class)
             ->brandLogo('/img/logo.png')
             ->favicon('/img/logo.png')
             ->maxContentWidth('full')
