@@ -12,6 +12,7 @@ use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -22,19 +23,6 @@ class ChangePasswordModal extends Component implements HasForms
     protected $listeners = ['resetFormData'];
 
     public ?array $data = [];
-
-    public ?array $rentPaymentData = [];
-
-    public ?array $visitorCheckOutData = [];
-
-    public ?array $serviceCheckOutData = [];
-
-    public $rent;
-
-    public $visitor;
-
-    public $serviceAttendance;
-
 
     public function render()
     {
@@ -108,5 +96,11 @@ class ChangePasswordModal extends Component implements HasForms
                 ->title($exception->getMessage())
                 ->send();
         }
+    }
+
+    #[On('close-modal')]
+    public function resetFormData()
+    {
+        $this->reset(['data']);
     }
 }

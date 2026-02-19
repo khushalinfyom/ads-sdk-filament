@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'media_disc' => env('MEDIA_DISK', 'public'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
