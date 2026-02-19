@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\Applications\Schemas;
 
 use App\Models\Qureka;
-use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -102,18 +101,24 @@ class ApplicationForm
                                 ->disk(config('app.media_disc'))
                                 ->collection(Qureka::QUREKA_INTERSTITIAL_IMAGE)
                                 ->image()
+                                ->multiple()
+                                ->maxFiles(1)
                                 ->imagePreviewHeight(150),
                             TextInput::make('native'),
                             SpatieMediaLibraryFileUpload::make('qureka_native_image')
                                 ->disk(config('app.media_disc'))
                                 ->collection(Qureka::QUREKA_NATIVE_IMAGE)
                                 ->image()
+                                ->multiple()
+                                ->maxFiles(1)
                                 ->imagePreviewHeight(150),
                             TextInput::make('banner'),
                             SpatieMediaLibraryFileUpload::make('qureka_banner_image')
                                 ->disk(config('app.media_disc'))
                                 ->collection(Qureka::QUREKA_BANNER_IMAGE)
                                 ->image()
+                                ->multiple()
+                                ->maxFiles(1)
                                 ->imagePreviewHeight(150),
                             TextInput::make('admob_click_gap'),
                         ])->columns(2)->columnSpanFull(),
