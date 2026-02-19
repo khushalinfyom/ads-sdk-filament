@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'backup_disc' => env('BACKUP_DISK', 'public'),
+
     'media_disc' => env('MEDIA_DISK', 'public'),
     /*
     |--------------------------------------------------------------------------
