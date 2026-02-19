@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Applications\Schemas;
 
 use App\Models\Qureka;
+use Filament\Forms\Components\BaseFileUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -93,30 +94,29 @@ class ApplicationForm
                     ])->columns(3)->columnSpanFull(),
 
                     // Qureka
-                    Section::make([
-                        TextInput::make('interstitial'),
-                        SpatieMediaLibraryFileUpload::make('qureka_interstitial_image')
-                            ->label(__('messages.profile'))
-                            ->disk(config('app.media_disc'))
-                            ->collection(Qureka::QUREKA_INTERSTITIAL_IMAGE)
-                            ->image()
-                            ->imagePreviewHeight(150),
-                        TextInput::make('native'),
-                        SpatieMediaLibraryFileUpload::make('qureka_native_image')
-                            ->label(__('messages.profile'))
-                            ->disk(config('app.media_disc'))
-                            ->collection(Qureka::QUREKA_NATIVE_IMAGE)
-                            ->image()
-                            ->imagePreviewHeight(150),
-                        TextInput::make('banner'),
-                        SpatieMediaLibraryFileUpload::make('qureka_banner_image')
-                            ->label(__('messages.profile'))
-                            ->disk(config('app.media_disc'))
-                            ->collection(Qureka::QUREKA_BANNER_IMAGE)
-                            ->image()
-                            ->imagePreviewHeight(150),
-                        TextInput::make('admob_click_gap'),
-                    ])->relationship('qureka')->columns(2)->columnSpanFull(),
+                    Section::make('Qureka')
+                        ->relationship('qureka')
+                        ->schema([
+                            TextInput::make('interstitial'),
+                            SpatieMediaLibraryFileUpload::make('qureka_interstitial_image')
+                                ->disk(config('app.media_disc'))
+                                ->collection(Qureka::QUREKA_INTERSTITIAL_IMAGE)
+                                ->image()
+                                ->imagePreviewHeight(150),
+                            TextInput::make('native'),
+                            SpatieMediaLibraryFileUpload::make('qureka_native_image')
+                                ->disk(config('app.media_disc'))
+                                ->collection(Qureka::QUREKA_NATIVE_IMAGE)
+                                ->image()
+                                ->imagePreviewHeight(150),
+                            TextInput::make('banner'),
+                            SpatieMediaLibraryFileUpload::make('qureka_banner_image')
+                                ->disk(config('app.media_disc'))
+                                ->collection(Qureka::QUREKA_BANNER_IMAGE)
+                                ->image()
+                                ->imagePreviewHeight(150),
+                            TextInput::make('admob_click_gap'),
+                        ])->columns(2)->columnSpanFull(),
                 ])->columns(2),
             ])->columns(1);
     }

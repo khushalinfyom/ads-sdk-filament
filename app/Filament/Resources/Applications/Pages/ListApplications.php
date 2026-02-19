@@ -13,7 +13,9 @@ class ListApplications extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()
+                ->label('New Application')
+                ->icon('heroicon-s-plus'),
         ];
     }
 }

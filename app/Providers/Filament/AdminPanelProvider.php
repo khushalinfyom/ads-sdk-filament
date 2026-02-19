@@ -3,17 +3,15 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\CustomEditProfile;
+use App\Filament\Pages\Auth\CustomLogin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -30,12 +28,16 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('/')
-            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->login()
+            ->passwordReset()
+            ->brandLogo('/img/logo.png')
+            ->favicon('/img/logo.png')
             ->maxContentWidth('full')
             ->sidebarWidth('17rem')
+            ->breadcrumbs(false)
             ->globalSearch(false)
             ->profile(CustomEditProfile::class, isSimple: false)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
@@ -43,13 +45,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->renderHook(PanelsRenderHook::BODY_END, fn() => Blade::render('@livewire(\'change-password-modal\')'))
             ->renderHook('panels::user-menu.profile.after', fn() => $this->changePassword())
-            ->pages([
-                Dashboard::class,
-            ])
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

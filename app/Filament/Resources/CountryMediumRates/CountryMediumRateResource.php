@@ -7,7 +7,6 @@ use App\Models\CountryMediumRate;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -19,7 +18,7 @@ class CountryMediumRateResource extends Resource
 {
     protected static ?string $model = CountryMediumRate::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::GlobeAlt;
 
     protected static ?string $recordTitleAttribute = 'CountryMediumRate';
 
